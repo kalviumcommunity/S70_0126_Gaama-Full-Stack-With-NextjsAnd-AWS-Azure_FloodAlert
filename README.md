@@ -73,7 +73,7 @@ Flood-prone districts need early-warning systems based on open meteorological da
 ### DevOps & Deployment
 
 - **Containerization**: Docker & Docker Compose
-- **Cloud**: AWS or Azure (Cloud deployment)
+- **Cloud**:  Azure (Cloud deployment)
 
 ## 7. High-Level Architecture
 
@@ -105,4 +105,4 @@ Flood severity determined using:
 - Functional real-time flood early warning platform
 - Clear visualization of flood risk
 - Faster dissemination of warnings
-- Improved preparedness for local residents
+- Improved preparedness for local people residing in the region
