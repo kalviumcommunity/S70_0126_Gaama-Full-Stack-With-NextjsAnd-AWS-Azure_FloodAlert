@@ -1,0 +1,52 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model District {
+  id        String   @id @default(uuid())
+  name      String
+  latitude  Float
+  longitude Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  weatherData     WeatherData[]
+  floodAlerts     FloodAlert[]
+  alertThresholds AlertThreshold[]
+}
+
+model WeatherData {
+  id          String   @id @default(uuid())
+  districtId  String
+  rainfall    Float    // in mm
+  riverLevel  Float    // in meters
+  recordedAt  DateTime @default(now())
+
+  district    District @relation(fields: [districtId], references: [id])
+}
+
+model FloodAlert {
+  id          String   @id @default(uuid())
+  districtId  String
+  severity    String   // Low, Medium, High
+  message     String
+  issuedAt    DateTime @default(now())
+  validUntil  DateTime
+
+  district    District @relation(fields: [districtId], references: [id])
+}
+
+model AlertThreshold {
+  id              String   @id @default(uuid())
+  districtId      String
+  rainThreshold   Float
+  riverThreshold  Float
+  severityLevel   String   // Low, Medium, High
+
+  district        District @relation(fields: [districtId], references: [id])
+}
