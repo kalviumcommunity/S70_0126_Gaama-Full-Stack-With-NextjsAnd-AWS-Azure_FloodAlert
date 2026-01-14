@@ -5,6 +5,14 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Start seeding ...');
 
+  // Clean up existing data to avoid duplicates
+  console.log('Cleaning up existing data...');
+  await prisma.floodAlert.deleteMany({});
+  await prisma.weatherData.deleteMany({});
+  await prisma.alertThreshold.deleteMany({});
+  await prisma.district.deleteMany({});
+  console.log('Data cleanup complete.');
+
   const districts = [
     {
       name: 'Central City',
